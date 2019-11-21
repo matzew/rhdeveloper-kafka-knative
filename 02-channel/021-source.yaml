@@ -1,0 +1,13 @@
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: ContainerSource
+metadata:
+  name: urbanobservatory-event-source
+spec:
+  image: docker.io/matzew/websocketsource-rhdevelopers 
+  args: 
+    - '--source=wss://api.usb.urbanobservatory.ac.uk/stream'
+    - '--eventType=my.custom.event'
+  sink:
+    apiVersion: messaging.knative.dev/v1alpha1
+    kind: KafkaChannel
+    name: kafka-channel-one
